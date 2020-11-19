@@ -543,9 +543,13 @@ public class Peripheral extends BluetoothGattCallback {
 	private BluetoothGattCharacteristic findNotifyCharacteristic(BluetoothGattService service,
 			UUID characteristicUUID) {
 
+		System.out.println("findNotifyCharacteristic", service, characteristicUUID);
+
 		try {
 			// Check for Notify first
 			List<BluetoothGattCharacteristic> characteristics = service.getCharacteristics();
+			System.out.println("getCharacteristics", characteristics);
+			System.out.println("1");
 			for (BluetoothGattCharacteristic characteristic : characteristics) {
 				if ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0
 						&& characteristicUUID.equals(characteristic.getUuid())) {
@@ -553,6 +557,7 @@ public class Peripheral extends BluetoothGattCallback {
 				}
 			}
 
+			System.out.println("2");
 			// If there wasn't Notify Characteristic, check for Indicate
 			for (BluetoothGattCharacteristic characteristic : characteristics) {
 				if ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0
@@ -561,6 +566,7 @@ public class Peripheral extends BluetoothGattCallback {
 				}
 			}
 
+			System.out.println("3");
 			// As a last resort, try and find ANY characteristic with this UUID, even if it
 			// doesn't have the correct properties
 			return service.getCharacteristic(characteristicUUID);
