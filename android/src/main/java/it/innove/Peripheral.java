@@ -543,12 +543,12 @@ public class Peripheral extends BluetoothGattCallback {
 	private BluetoothGattCharacteristic findNotifyCharacteristic(BluetoothGattService service,
 			UUID characteristicUUID) {
 
-		System.out.println("findNotifyCharacteristic", service, characteristicUUID);
+		System.out.println("findNotifyCharacteristic " + service + " " characteristicUUID);
 
 		try {
 			// Check for Notify first
 			List<BluetoothGattCharacteristic> characteristics = service.getCharacteristics();
-			System.out.println("getCharacteristics", characteristics);
+			System.out.println("getCharacteristics " + characteristics);
 			System.out.println("1");
 			for (BluetoothGattCharacteristic characteristic : characteristics) {
 				if ((characteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0
